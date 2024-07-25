@@ -1,0 +1,363 @@
+// Private data and helper functions
+const holidays = [
+  {
+    name: "New Year's Day",
+    date: (year: any) => new Date(year, 0, 1),
+    type: "public",
+    country: "global",
+  },
+  {
+    name: "Christmas Day",
+    date: (year: any) => new Date(year, 11, 25),
+    type: "religious",
+    country: "global",
+  },
+  {
+    name: "Valentine's Day",
+    date: (year: any) => new Date(year, 1, 14),
+    type: "public",
+    country: "global",
+  },
+  {
+    name: "Independence Day",
+    date: (year: any) => new Date(year, 6, 4),
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Halloween",
+    date: (year: any) => new Date(year, 9, 31),
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Thanksgiving",
+    date: (year: any) => {
+      const d = new Date(year, 10, 1);
+      while (d.getDay() !== 4) {
+        d.setDate(d.getDate() + 1);
+      }
+      d.setDate(d.getDate() + 21);
+      return d;
+    },
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Labor Day",
+    date: (year: any) => {
+      const d = new Date(year, 8, 1);
+      while (d.getDay() !== 1) {
+        d.setDate(d.getDate() + 1);
+      }
+      return d;
+    },
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Memorial Day",
+    date: (year: any) => {
+      const d = new Date(year, 4, 31);
+      while (d.getDay() !== 1) {
+        d.setDate(d.getDate() - 1);
+      }
+      return d;
+    },
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Veterans Day",
+    date: (year: any) => new Date(year, 10, 11),
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Martin Luther King Jr. Day",
+    date: (year: any) => {
+      const d = new Date(year, 0, 1);
+      while (d.getDay() !== 1) {
+        d.setDate(d.getDate() + 1);
+      }
+      d.setDate(d.getDate() + 14);
+      return d;
+    },
+    type: "public",
+    country: "US",
+  },
+  {
+    name: "Good Friday",
+    date: (year: any) => {
+      const easterSunday = movableHolidays
+        .find((h: any) => h.name === "Easter Sunday")
+        .calculate(year);
+      return addDays(easterSunday, -2);
+    },
+    type: "religious",
+    country: "global",
+  },
+  {
+    name: "Boxing Day",
+    date: (year: any) => new Date(year, 11, 26),
+    type: "public",
+    country: "UK, Canada",
+  },
+  {
+    name: "Canada Day",
+    date: (year: any) => new Date(year, 6, 1),
+    type: "public",
+    country: "Canada",
+  },
+  {
+    name: "Australia Day",
+    date: (year: any) => new Date(year, 0, 26),
+    type: "public",
+    country: "Australia",
+  },
+  {
+    name: "Victoria Day",
+    date: (year: any) => {
+      const d = new Date(year, 4, 25);
+      while (d.getDay() !== 1) {
+        d.setDate(d.getDate() - 1);
+      }
+      return d;
+    },
+    type: "public",
+    country: "Canada",
+  },
+  {
+    name: "Remembrance Day",
+    date: (year: any) => new Date(year, 10, 11),
+    type: "public",
+    country: "Canada, UK",
+  },
+  {
+    name: "St. Patrick's Day",
+    date: (year: any) => new Date(year, 2, 17),
+    type: "public",
+    country: "Ireland",
+  },
+  {
+    name: "Bastille Day",
+    date: (year: any) => new Date(year, 6, 14),
+    type: "public",
+    country: "France",
+  },
+  {
+    name: "Cinco de Mayo",
+    date: (year: any) => new Date(year, 4, 5),
+    type: "public",
+    country: "Mexico",
+  },
+];
+
+const movableHolidays: any = [
+  {
+    name: "Easter Sunday",
+    calculate: (year: any) => {
+      // Easter calculation algorithm (Meeus/Jones/Butcher algorithm)
+      const a = year % 19;
+      const b = Math.floor(year / 100);
+      const c = year % 100;
+      const d = Math.floor(b / 4);
+      const e = b % 4;
+      const f = Math.floor((b + 8) / 25);
+      const g = Math.floor((b - f + 1) / 3);
+      const h = (19 * a + b - d - g + 15) % 30;
+      const i = Math.floor(c / 4);
+      const k = c % 4;
+      const l = (32 + 2 * e + 2 * i - h - k) % 7;
+      const m = Math.floor((a + 11 * h + 22 * l) / 451);
+      const month = Math.floor((h + l - 7 * m + 114) / 31) - 1;
+      const day = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(year, month, day);
+    },
+    type: "religious",
+    country: "global",
+  },
+  {
+    name: "Ash Wednesday",
+    calculate: (year: any) => {
+      const easterSunday = movableHolidays
+        .find((h: any) => h.name === "Easter Sunday")
+        .calculate(year);
+      return addDays(easterSunday, -46);
+    },
+    type: "religious",
+    country: "global",
+  },
+  {
+    name: "Palm Sunday",
+    calculate: (year: any) => {
+      const easterSunday = movableHolidays
+        .find((h: any) => h.name === "Easter Sunday")
+        .calculate(year);
+      return addDays(easterSunday, -7);
+    },
+    type: "religious",
+    country: "global",
+  },
+  {
+    name: "Pentecost",
+    calculate: (year: any) => {
+      const easterSunday = movableHolidays
+        .find((h: any) => h.name === "Easter Sunday")
+        .calculate(year);
+      return addDays(easterSunday, 49);
+    },
+    type: "religious",
+    country: "global",
+  },
+  {
+    name: "Ascension Day",
+    calculate: (year: any) => {
+      const easterSunday = movableHolidays
+        .find((h: any) => h.name === "Easter Sunday")
+        .calculate(year);
+      return addDays(easterSunday, 39);
+    },
+    type: "religious",
+    country: "global",
+  },
+];
+
+function addDays(date: any, days: any) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+function isSameDay(date1: any, date2: any) {
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+}
+
+const BestHoliday = {
+  getHolidaysForDay: function (date: Date, filters: any = {}) {
+    const year = date.getFullYear();
+    let allHolidays = [...holidays, ...movableHolidays];
+
+    // Apply filters
+    if (filters.types) {
+      const typeFilter = Array.isArray(filters.types)
+        ? filters.types
+        : [filters.types];
+      allHolidays = allHolidays.filter((h) => typeFilter.includes(h.type));
+    }
+    if (filters.countries) {
+      const countryFilter = Array.isArray(filters.countries)
+        ? filters.countries
+        : [filters.countries];
+      allHolidays = allHolidays.filter((h) =>
+        countryFilter.includes(h.country)
+      );
+    }
+
+    return allHolidays
+      .filter((holiday) => {
+        const holidayDate = holiday.calculate
+          ? holiday.calculate(year)
+          : typeof holiday.date === "function"
+          ? holiday.date(year)
+          : holiday.date;
+        return isSameDay(holidayDate, date);
+      })
+      .map((holiday) => ({
+        ...holiday,
+        date: holiday.calculate
+          ? holiday.calculate(year)
+          : typeof holiday.date === "function"
+          ? holiday.date(year)
+          : holiday.date,
+      }));
+  },
+
+  getHolidaysInRange: function (startDate: Date, endDate: Date, filters = {}) {
+    const result = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      const holidaysForDay = this.getHolidaysForDay(currentDate, filters);
+      if (holidaysForDay.length > 0) {
+        result.push({
+          date: new Date(currentDate),
+          holidays: holidaysForDay,
+        });
+      }
+      currentDate = addDays(currentDate, 1);
+    }
+
+    return result;
+  },
+
+  searchHolidays: function (query: string, year: number, filters: any = {}) {
+    const lowercaseQuery = query.toLowerCase();
+    let allHolidays = [...holidays, ...movableHolidays];
+
+    // Apply filters
+    if (filters.types) {
+      const typeFilter = Array.isArray(filters.types)
+        ? filters.types
+        : [filters.types];
+      allHolidays = allHolidays.filter((h) => typeFilter.includes(h.type));
+    }
+    if (filters.countries) {
+      const countryFilter = Array.isArray(filters.countries)
+        ? filters.countries
+        : [filters.countries];
+      allHolidays = allHolidays.filter((h) =>
+        countryFilter.includes(h.country)
+      );
+    }
+
+    return allHolidays
+      .filter(
+        (holiday) =>
+          holiday.name.toLowerCase().includes(lowercaseQuery) ||
+          holiday.type.toLowerCase().includes(lowercaseQuery) ||
+          holiday.country.toLowerCase().includes(lowercaseQuery)
+      )
+      .map((holiday) => ({
+        ...holiday,
+        date: holiday.calculate
+          ? holiday.calculate(year)
+          : typeof holiday.date === "function"
+          ? holiday.date(year)
+          : holiday.date,
+      }));
+  },
+
+  getEasterRelatedHoliday: function (year: number, offsetDays: number = 0) {
+    const easterSunday = movableHolidays
+      .find((h: any) => h.name === "Easter Sunday")
+      .calculate(year);
+    return addDays(easterSunday, offsetDays);
+  },
+
+  addHoliday: function (holiday: any) {
+    if (
+      typeof holiday.date === "function" ||
+      typeof holiday.calculate === "function"
+    ) {
+      holidays.push(holiday);
+    } else {
+      throw new Error(
+        "Holiday must have a date function or calculate function"
+      );
+    }
+  },
+
+  removeHoliday: function (holidayName: any) {
+    const index = holidays.findIndex((h) => h.name === holidayName);
+    if (index !== -1) {
+      holidays.splice(index, 1);
+    }
+  },
+};
+
+export default BestHoliday;
