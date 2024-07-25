@@ -1,0 +1,29 @@
+{
+  "name": "best-holiday",
+  "version": "1.0.0",
+  "description": "Holidays and JavaScript, now Customizable and Effortless",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Best-Codes/best-holiday.git"
+  },
+  "bugs": {
+    "url": "https://github.com/The-Best-Codes/best-holiday/issues"
+  },
+  "homepage": "https://github.com/The-Best-Codes/best-holiday#readme",
+  "keywords": [
+    "bestcodes",
+    "holidays",
+    "holiday",
+    "javascript",
+    "js",
+    "customizable",
+    "effortless",
+    "easy"
+  ],
+  "author": "The-Best-Codes",
+  "license": "GPL-3.0-or-later"
+}
