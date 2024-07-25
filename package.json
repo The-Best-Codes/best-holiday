@@ -2,10 +2,25 @@
   "name": "best-holiday",
   "version": "1.0.0",
   "description": "Holidays and JavaScript, now Customizable and Effortless",
-  "main": "src/index.js",
   "scripts": {
-    "test": "node test/index.js"
+    "build:cjs": "tsc --project tsconfig.cjs.json || true",
+    "build:esm": "tsc --project tsconfig.esm.json || true",
+    "build:browser": "esbuild src/browser.ts --bundle --minify --sourcemap --format=iife --platform=browser --target=es2015 --outfile=dist/browser/best-bible.min.js",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:browser",
+    "prepublishOnly": "npm run build"
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts",
+      "browser": "./dist/browser/best-bible.min.js"
+    }
+  },
+  "browser": "./dist/browser/best-bible.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/The-Best-Codes/best-holiday.git"
@@ -25,5 +40,14 @@
     "easy"
   ],
   "author": "The-Best-Codes",
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "esbuild": "^0.23.0",
+    "esm": "^3.2.25",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "tsup": "^8.2.3",
+    "typescript": "^5.5.4"
+  }
 }
