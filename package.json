@@ -1,6 +1,6 @@
 {
   "name": "best-holiday",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Holidays and JavaScript, now Customizable and Effortless",
   "scripts": {
     "build:cjs": "tsc --project tsconfig.cjs.json || true",
