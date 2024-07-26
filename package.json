@@ -5,7 +5,7 @@
   "scripts": {
     "build:cjs": "tsc --project tsconfig.cjs.json || true",
     "build:esm": "tsc --project tsconfig.esm.json || true",
-    "build:browser": "esbuild src/browser.ts --bundle --minify --sourcemap --format=iife --platform=browser --target=es2015 --outfile=dist/browser/best-bible.min.js",
+    "build:browser": "esbuild src/browser.ts --bundle --minify --sourcemap --format=iife --platform=browser --target=es2015 --outfile=dist/browser/best-holiday.min.js",
     "build": "npm run build:cjs && npm run build:esm && npm run build:browser",
     "prepublishOnly": "npm run build"
   },
@@ -17,10 +17,10 @@
       "require": "./dist/cjs/index.js",
       "import": "./dist/esm/index.js",
       "types": "./dist/types/index.d.ts",
-      "browser": "./dist/browser/best-bible.min.js"
+      "browser": "./dist/browser/best-holiday.min.js"
     }
   },
-  "browser": "./dist/browser/best-bible.min.js",
+  "browser": "./dist/browser/best-holiday.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/The-Best-Codes/best-holiday.git"
