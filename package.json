@@ -43,7 +43,7 @@
   "author": "The-Best-Codes",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@types/node": "^20.14.12",
+    "@types/node": "^22.0.0",
     "esbuild": "^0.23.0",
     "esm": "^3.2.25",
     "fs": "^0.0.1-security",
