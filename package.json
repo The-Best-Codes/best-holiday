@@ -1,6 +1,6 @@
 {
   "name": "best-holiday",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Holidays and JavaScript, now Customizable and Effortless",
   "scripts": {
     "build:cjs": "tsc --project tsconfig.cjs.json || true",
@@ -43,12 +43,12 @@
   "author": "The-Best-Codes",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "^22.2.0",
     "esbuild": "^0.23.0",
     "esm": "^3.2.25",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
-    "tsup": "^8.2.3",
+    "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   }
 }
