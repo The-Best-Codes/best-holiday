@@ -5,6 +5,10 @@ on:
     - cron: "0 0 * * 0" # Run every Sunday at midnight UTC
   workflow_dispatch: # Enable manual triggering of the workflow
 
+permissions:
+  contents: write
+  issues: write
+
 jobs:
   update-dependencies:
     runs-on: ubuntu-latest
