@@ -3,6 +3,7 @@ name: Weekly npm update
 on:
   schedule:
     - cron: "0 0 * * 0" # Run every Sunday at midnight UTC
+  workflow_dispatch: # Enable manual triggering of the workflow
 
 jobs:
   update-dependencies:
