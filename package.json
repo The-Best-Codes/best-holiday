@@ -1,6 +1,6 @@
 {
   "name": "best-holiday",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "Holidays and JavaScript, now Customizable and Effortless",
   "scripts": {
     "build:cjs": "tsc --project tsconfig.cjs.json || true",
@@ -10,15 +10,20 @@
     "test": "node test/index.js",
     "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js",
       "types": "./dist/types/index.d.ts",
-      "browser": "./dist/browser/best-holiday.min.js"
+      "browser": "./dist/browser/best-holiday.min.js",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
     }
   },
   "browser": "./dist/browser/best-holiday.min.js",
