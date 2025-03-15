@@ -166,7 +166,7 @@ const movableHolidays: any = [
       const may = new Date(year, 4, 1);
       const firstSunday = new Date(may.setDate(1 + ((7 - may.getDay()) % 7)));
       const secondSunday = new Date(
-        firstSunday.setDate(firstSunday.getDate() + 7)
+        firstSunday.setDate(firstSunday.getDate() + 7),
       );
       return secondSunday;
     },
@@ -179,7 +179,7 @@ const movableHolidays: any = [
       const june = new Date(year, 5, 1);
       const firstSunday = new Date(june.setDate(1 + ((7 - june.getDay()) % 7)));
       const thirdSunday = new Date(
-        firstSunday.setDate(firstSunday.getDate() + 14)
+        firstSunday.setDate(firstSunday.getDate() + 14),
       );
       return thirdSunday;
     },
@@ -292,8 +292,8 @@ function getHolidaysForDay(date: Date, filters: any = {}) {
       const holidayDate = holiday.calculate
         ? holiday.calculate(year)
         : typeof holiday.date === "function"
-        ? holiday.date(year)
-        : holiday.date;
+          ? holiday.date(year)
+          : holiday.date;
       return isSameDay(holidayDate, date);
     })
     .map((holiday) => ({
@@ -301,8 +301,8 @@ function getHolidaysForDay(date: Date, filters: any = {}) {
       date: holiday.calculate
         ? holiday.calculate(year)
         : typeof holiday.date === "function"
-        ? holiday.date(year)
-        : holiday.date,
+          ? holiday.date(year)
+          : holiday.date,
     }));
 }
 
@@ -347,15 +347,15 @@ function searchHolidays(query: string, year: number, filters: any = {}) {
       (holiday) =>
         holiday.name.toLowerCase().includes(lowercaseQuery) ||
         holiday.type.toLowerCase().includes(lowercaseQuery) ||
-        holiday.country.toLowerCase().includes(lowercaseQuery)
+        holiday.country.toLowerCase().includes(lowercaseQuery),
     )
     .map((holiday) => ({
       ...holiday,
       date: holiday.calculate
         ? holiday.calculate(year)
         : typeof holiday.date === "function"
-        ? holiday.date(year)
-        : holiday.date,
+          ? holiday.date(year)
+          : holiday.date,
     }));
 }
 

@@ -15,12 +15,12 @@ We will acknowledge receipt of your report within 48 hours and will keep you inf
 
 We are committed to providing security updates for the following versions of best-holiday:
 
-| Version | Supported          |
-| ------- | ------------------ |
+| Version                                | Supported          |
+| -------------------------------------- | ------------------ |
 | (_Latest version is always supported_) | :white_check_mark: |
-| 1.0.2   | :white_check_mark: |
-| 1.0.1   | :white_check_mark: |
-| 1.0.0   | :x: |
+| 1.0.2                                  | :white_check_mark: |
+| 1.0.1                                  | :white_check_mark: |
+| 1.0.0                                  | :x:                |
 
 If you are using an older version of best-holiday, we strongly recommend upgrading to a supported version to ensure you receive the latest security updates.
 
